@@ -1,0 +1,115 @@
+// ============================================
+// 蓝色系主题配色 - tianshiyan521 博客
+// ============================================
+
+// 主题色：蓝色
+$theme-color = #3b82f6
+$theme-color-dark = #60a5fa
+$theme-color-light = #93bbfd
+
+// 轻量模式下全局覆盖
+:root {
+  --theme-color: #3b82f6;
+  --theme-color-dark: #2563eb;
+  --theme-color-light: #dbeafe;
+
+  // 链接颜色
+  --link-color: #3b82f6;
+  --link-hover-color: #2563eb;
+
+  // 按钮
+  --btn-default-bg: #3b82f6;
+  --btn-default-hover-bg: #2563eb;
+  --btn-default-color: #fff;
+}
+
+// 暗黑模式覆盖
+@media (prefers-color-scheme: dark) {
+  :root {
+    --theme-color: #60a5fa;
+    --link-color: #60a5fa;
+    --link-hover-color: #93c5fd;
+    --btn-default-bg: #60a5fa;
+    --btn-default-hover-bg: #3b82f6;
+    --btn-default-color: #fff;
+  }
+}
+
+// 导航栏激活项
+.menu-item-active a {
+  background: var(--theme-color) !important;
+}
+
+// 按钮全局
+.btn {
+  background: var(--btn-default-bg) !important;
+  border-color: var(--btn-default-bg) !important;
+  color: var(--btn-default-color) !important;
+}
+
+.btn:hover {
+  background: var(--btn-default-hover-bg) !important;
+}
+
+// 链接
+a {
+  color: var(--link-color);
+}
+
+a:hover {
+  color: var(--link-hover-color);
+}
+
+// 文章标题链接
+.posts-expand .post-title-link {
+  color: #1e293b;
+}
+
+.posts-expand .post-title-link:hover {
+  color: var(--theme-color);
+}
+
+// 侧边栏链接
+.sidebar a {
+  color: #4b5563;
+}
+
+.sidebar a:hover {
+  color: var(--theme-color);
+}
+
+// 页脚链接
+.footer a {
+  color: var(--theme-color);
+}
+
+// 标签
+.tag-cloud a {
+  color: var(--theme-color) !important;
+}
+
+// 回到顶部按钮
+.back-to-top {
+  background: var(--theme-color) !important;
+}
+
+// 阅读进度条
+.reading-progress-bar {
+  background: var(--theme-color) !important;
+}
+
+// 分页
+.pagination .page-number.current {
+  background: var(--theme-color) !important;
+  border-color: var(--theme-color) !important;
+}
+
+// 引用块边框
+blockquote {
+  border-left-color: var(--theme-color) !important;
+}
+
+// 代码高亮中的关键字颜色（浅色）
+.highlight {
+  border-left-color: var(--theme-color) !important;
+}

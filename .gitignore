@@ -1,0 +1,22 @@
+# ---------------- 依赖 ----------------
+node_modules/
+package-lock.json
+
+# ---------------- Hexo 构建产物 ----------------
+public/
+.deploy_git/
+db.json
+
+# ---------------- 系统与编辑器 ----------------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ---------------- 临时文件 ----------------
+*.log
+*.tmp
+npm-debug.log*
+yarn-error.log*

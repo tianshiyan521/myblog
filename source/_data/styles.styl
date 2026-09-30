@@ -113,3 +113,62 @@ blockquote {
 .highlight {
   border-left-color: var(--theme-color) !important;
 }
+
+// ============================================
+// 代码块复制按钮
+// ============================================
+.highlight .copy-btn,
+figure.highlight .copy-btn {
+  border-radius: 4px;
+  transition: all .2s ease;
+}
+
+// ============================================
+// giscus 评论区
+// ============================================
+.giscus-wrapper {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.giscus-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.giscus-loading {
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: .9rem;
+  color: #9ca3af;
+}
+
+@media (prefers-color-scheme: dark) {
+  .giscus-wrapper {
+    border-top-color: #374151;
+  }
+  .giscus-title {
+    color: #e5e7eb;
+  }
+  .giscus-loading {
+    color: #6b7280;
+  }
+}
+
+// ============================================
+// 学习路径页（/path/）微调
+// ============================================
+.post-body h2 {
+  margin-top: 2.2rem;
+}
+
+.post-body table {
+  font-size: .92em;
+}
+
+.post-body code {
+  word-break: break-word;
+}

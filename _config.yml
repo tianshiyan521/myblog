@@ -104,6 +104,30 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: next
 
+# Sitemap
+## 生成 sitemap.xml，供搜索引擎抓取
+## Docs: https://github.com/hexojs/hexo-generator-sitemap
+sitemap:
+  path:
+    - sitemap.xml
+  rel: false
+  tags: true
+  categories: true
+
+# Feed
+## 生成 RSS 订阅源（atom.xml）
+## Docs: https://github.com/hexojs/hexo-generator-feed
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content: true
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+  icon: /images/favicon.ico
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:

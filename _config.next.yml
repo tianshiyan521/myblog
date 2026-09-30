@@ -24,7 +24,7 @@ custom_file_path:
   #sidebar: source/_data/sidebar.njk
   #postMeta: source/_data/post-meta.njk
   #postBodyStart: source/_data/post-body-start.njk
-  #postBodyEnd: source/_data/post-body-end.njk
+  postBodyEnd: source/_data/post-body-end.njk
   #footer: source/_data/footer.njk
   #bodyEnd: source/_data/body-end.njk
   #variable: source/_data/variables.styl
@@ -103,6 +103,7 @@ open_graph:
 # External url should start with http:// or https://
 menu:
   home: / || fa fa-home
+  学习路径: /path/ || fa fa-road
   自动化测试: /categories/automation/ || fa fa-robot
   数据库学习: /categories/database/ || fa fa-database
   其他: /categories/other/ || fa fa-folder
@@ -378,9 +379,9 @@ codeblock:
     dark: prism-dark
   # Add copy button on codeblock
   copy_button:
-    enable: false
+    enable: true
     # Available values: default | flat | mac
-    style:
+    style: flat
   # Fold code block
   fold:
     enable: false
@@ -740,7 +741,7 @@ gitalk:
 # Utterances
 # For more information: https://utteranc.es
 utterances:
-  enable: true
+  enable: false
   repo: tianshiyan521/tianshiyan521.github.io
   issue_term: pathname
   # Available values: github-light | github-dark | preferred-color-scheme | github-dark-orange | icy-dark | dark-blue | photon-dark | boxy-light

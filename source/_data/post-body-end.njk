@@ -1,0 +1,54 @@
+{#- giscus 评论系统注入 -#}
+{#- 通过 JS 判断当前是否为文章页，避免依赖模板上下文变量 -#}
+{#- 注意：category-id 未配置时自动隐藏评论区，不会显示"加载中" -#}
+<div id="giscus-container" class="giscus-wrapper" style="display:none;">
+  <div class="giscus-title">💬 评论</div>
+  <div class="giscus-loading">评论加载中……</div>
+</div>
+<script>
+(function () {
+  // ---- 配置区：category-id 拿到后填这里 ----
+  var GISCUS_REPO_ID = 'R_kgDOUyOKyw';
+  var GISCUS_CATEGORY_ID = '';   // 形如 DIC_kwDOUyOKyw4C______，未填则自动隐藏评论区
+  // -----------------------------------------
+
+  // 只在实际文章页显示（URL 形如 /2026/09/30/文章名/）
+  if (!/\/\d{4}\/\d{2}\/\d{2}\/.+/.test(location.pathname)) return;
+
+  var container = document.getElementById('giscus-container');
+  if (!container) return;
+
+  // 配置未就绪时不显示，避免出现空评论区
+  if (!GISCUS_REPO_ID || !GISCUS_CATEGORY_ID) return;
+
+  container.style.display = '';
+
+  var script = document.createElement('script');
+  script.src = 'https://giscus.app/client.js';
+  script.setAttribute('data-repo', 'tianshiyan521/myblog');
+  script.setAttribute('data-repo-id', GISCUS_REPO_ID);
+  script.setAttribute('data-category', 'Announcements');
+  script.setAttribute('data-category-id', GISCUS_CATEGORY_ID);
+  script.setAttribute('data-mapping', 'pathname');
+  script.setAttribute('data-strict', '0');
+  script.setAttribute('data-reactions-enabled', '1');
+  script.setAttribute('data-emit-metadata', '0');
+  script.setAttribute('data-input-position', 'bottom');
+  script.setAttribute('data-theme', 'preferred_color_scheme');
+  script.setAttribute('data-lang', 'zh-CN');
+  script.setAttribute('data-loading', 'lazy');
+  script.crossOrigin = 'anonymous';
+  script.async = true;
+
+  script.onload = function () {
+    var tip = container.querySelector('.giscus-loading');
+    if (tip && container.querySelector('iframe')) tip.remove();
+  };
+  script.onerror = function () {
+    var tip = container.querySelector('.giscus-loading');
+    if (tip) tip.textContent = '评论加载失败，请检查网络后刷新。';
+  };
+
+  container.appendChild(script);
+})();
+</script>

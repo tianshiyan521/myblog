@@ -26,14 +26,16 @@ jobs:
         uses: actions/checkout@v4
 
       # 2. 安装 Node.js（用 20 LTS，Hexo 7 兼容）
+      #    仅当 lock 文件存在时才启用 npm 缓存，避免缓存步骤直接失败
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: ${{ hashFiles('package-lock.json') != '' && 'npm' || '' }}
 
       # 3. 安装依赖
-      #    优先用 lock 文件做可复现安装，失败则退回普通安装
+      #    有 lock 文件用 npm ci（严格按锁定版本安装，可复现）
+      #    没有则退回 npm install
       - name: Install dependencies
         run: |
           if [ -f package-lock.json ]; then

@@ -1,6 +1,8 @@
 # ---------------- 依赖 ----------------
 node_modules/
-package-lock.json
+# 注意：package-lock.json 必须纳入版本控制
+# CI（GitHub Actions）依赖它做可复现构建，且 actions/setup-node 的
+# cache: 'npm' 需要它存在，缺失会直接导致 workflow 在 Setup Node 步骤失败
 
 # ---------------- Hexo 构建产物 ----------------
 public/

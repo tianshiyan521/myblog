@@ -50,9 +50,27 @@ jobs:
           npx hexo clean
           npx hexo generate
 
-      # 5. 部署到 GitHub Pages 仓库
+      # 5. 部署前检查 DEPLOY_TOKEN 是否配置
+      #    未配置时直接给出可读的错误提示，避免看到难懂的 git 认证失败
+      - name: Verify DEPLOY_TOKEN
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        run: |
+          if [ -z "$DEPLOY_TOKEN" ]; then
+            echo "::error::未配置 DEPLOY_TOKEN"
+            echo ""
+            echo "请在仓库 Settings → Secrets and variables → Actions 中添加："
+            echo "  Name:   DEPLOY_TOKEN"
+            echo "  Secret: 一个对 tianshiyan521.github.io 有 Contents 写权限的 Token"
+            echo ""
+            echo "详细步骤见项目根目录的「待手动操作清单.md」"
+            exit 1
+          fi
+          echo "DEPLOY_TOKEN 已配置（长度 ${#DEPLOY_TOKEN}）"
+
+      # 6. 部署到 GitHub Pages 仓库
       #    需要仓库 Secrets 中配置 DEPLOY_TOKEN：
-      #    一个对 tianshiyan521.github.io 有写权限的 Personal Access Token
+      #    一个对 tianshiyan521.github.io 有 Contents: Read and write 权限的 Token
       - name: Deploy to GitHub Pages
         env:
           DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
@@ -64,3 +82,4 @@ jobs:
           git add -A
           git commit -q -m "chore: auto deploy from ${GITHUB_SHA::7}"
           git push -f "https://x-access-token:${DEPLOY_TOKEN}@github.com/tianshiyan521/tianshiyan521.github.io.git" HEAD:main
+          echo "✅ 已部署到 https://tianshiyan521.github.io"

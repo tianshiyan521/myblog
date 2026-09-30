@@ -1,0 +1,64 @@
+name: Deploy Hexo Blog
+
+# 触发条件：推送到 master 分支，或手动触发
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+# 赋予 GITHUB_TOKEN 写入权限，用于部署到 Pages
+permissions:
+  contents: write
+
+# 同一时间只跑一个部署任务，避免并发冲突
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 拉取博客源码
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      # 2. 安装 Node.js（用 20 LTS，Hexo 7 兼容）
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 3. 安装依赖
+      #    优先用 lock 文件做可复现安装，失败则退回普通安装
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      # 4. 清理旧产物并重新生成静态文件
+      - name: Build site
+        run: |
+          npx hexo clean
+          npx hexo generate
+
+      # 5. 部署到 GitHub Pages 仓库
+      #    需要仓库 Secrets 中配置 DEPLOY_TOKEN：
+      #    一个对 tianshiyan521.github.io 有写权限的 Personal Access Token
+      - name: Deploy to GitHub Pages
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        run: |
+          cd public
+          git init -q
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "chore: auto deploy from ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${DEPLOY_TOKEN}@github.com/tianshiyan521/tianshiyan521.github.io.git" HEAD:main

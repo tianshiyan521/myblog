@@ -41,10 +41,13 @@ comments: false
 | 文章 | 讲什么 |
 |---|---|
 | [测试基础 · 导读](/2026/06/12/testing-basics-intro/) | 这个系列值不值得看，先看这篇 |
-| [第2课：BUG 管理与缺陷生命周期](/2026/06/12/testing-basics-chapter2-bug-management/) | 优先级怎么定、偶现 BUG 怎么提 |
-| [第4课：用例设计方法](/2026/06/15/testing-basics-chapter4-case-design/) | 等价类 / 边界值 / 因果图 / 错误推测 / 白盒覆盖 |
+| [第2章：BUG 管理](/2026/06/12/testing-basics-chapter2-bug-management/) | 严重等级怎么分、偶现 BUG 怎么提 |
+| [第4章：用例设计方法](/2026/06/15/testing-basics-chapter4-case-design/) | 等价类 / 边界值 / 因果图 / 错误推测 / 白盒覆盖 |
+| [第5章：缺陷生命周期详解](/2026/10/12/testing-basics-chapter5-defect-lifecycle/) | 六态流转、Reopen 三判据、**严重程度 ≠ 优先级** |
 
 **核心认知**：用例设计方法不是考试题，是**压缩测试工作量**的工具。等价类帮你少测一半，边界值帮你找到 80% 的 BUG。
+
+**而缺陷生命周期管的是另一件事** —— 它的价值不在流程本身，而在**职责边界**：谁能关单、谁能拒绝、你说"没修好"时拿什么证据。
 
 ---
 
@@ -150,5 +153,5 @@ comments: false
 ---
 
 <div style="text-align:center;margin-top:2rem;opacity:.7;font-size:.9em">
-持续更新中 · 最后更新 2026-09-30
+持续更新中 · 最后更新 2026-10-12
 </div>

@@ -172,3 +172,16 @@ figure.highlight .copy-btn {
 .post-body code {
   word-break: break-word;
 }
+
+// ============================================
+// 侧边栏头像：不显示图片，保留等尺寸留白
+// ============================================
+// 原头像尺寸为 120px（见 .site-author-image 的 max-width）
+// 用同尺寸空白占位，侧边栏布局与原来一致，只是头像位置留空
+.site-author::before {
+  content: '';
+  display: block;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
